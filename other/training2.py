@@ -22,4 +22,10 @@
 #          break
 # else: print('буквы b нет в строке')
 
+def sum(x,y):
+    return x + y
+
+print(sum(1,10))
+
+
 
