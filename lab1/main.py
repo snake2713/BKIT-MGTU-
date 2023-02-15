@@ -9,15 +9,10 @@ def get_coef(index, prompt):
         print(prompt)
         coef_str = input()
     # Переводим строку в действительное число
-    '''
-    Проверяем можно ли преобразовать строку в число и если 
-    нельзя, то вводим коэффицент вновь.
-    '''
-    try:
+
+    try: #пробуем преобразовать строку в число
         coef = float(coef_str)
-        # print(string_int)
-    except ValueError:
-        # Handle the exception
+    except ValueError: #в функцию передан аргумент с неподдерживаемым значением.
         print('Введено некорректное число.')
         coef = get_coef(index, 'Введите коэффициент снова:')
     return coef
@@ -27,24 +22,20 @@ def get_D(a, b, c):
     return b * b - 4 * a * c
 
 def get_roots(a, b, c):
-    result = []  # Cписок корней
-    '''
-    Рассмотрим случаи, когда один из коэффициентов
-    b или c равен 0 отдельно, так как их можно 
-    вычислить проще.
-    '''
+    result = [] 
+     # Рассматриваем случаи, когда b или c уравнения равны 0:
     if c == 0:
         result.append(0)
-        Dc = - b / a
+        Dc = - b / a #решаем простое уравнение типа x^2 - bx 
         if Dc > 0:
             root1 = math.sqrt(Dc)
             root2 = - math.sqrt(Dc)
-            result.append(root1)
-            result.append(root2)
+            result.append(root1) #добавляем корень в конец списка результатов
+            result.append(root2) #аналогично
         return result
 
     elif b == 0:
-        Db = - c / a
+        Db = - c / a #решаем простое уравнение типа x^4 = c
         if Db > 0:
             root1 = math.sqrt(math.sqrt(Db))
             root2 = - math.sqrt(math.sqrt(Db))
@@ -92,13 +83,13 @@ def get_roots(a, b, c):
 def main():
     a = get_coef(1, 'Введите коэффициент А:')
     while a == 0:
-        a = get_coef(1, 'Коэффицент A не может быть равен 0. Введите коэффициент А снова:')
+        a = get_coef(1, 'Введите коэффициент А снова:')
     b = get_coef(2, 'Введите коэффициент B:')
     c = get_coef(3, 'Введите коэффициент C:')
     # Вычисление корней
     roots = get_roots(a, b, c)
     # Вывод корней
-    len_roots = len(roots)
+    len_roots = len(roots) #возвращаем количество символов в строке(те корней)
     if len_roots == 0:
         print('Нет корней')
     elif len_roots == 1:
