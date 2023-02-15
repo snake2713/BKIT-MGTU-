@@ -1,74 +1,116 @@
 import sys
-import math  #модуль для работы с числамм
+import math
+
 
 def get_coef(index, prompt):
     try:
-        # Пробуем прочитать коэффициент из командной строки
         coef_str = sys.argv[index]
     except:
-        # Вводим с клавиатуры
         print(prompt)
         coef_str = input()
-    flag = False
-    # Проверка на число
-    while (flag == False):
-        try:
-            # Пробуем перевести строку в действительное число
-            coef = float(coef_str)
-        except:
-            # Если не получилось, то просим ввести еще раз
-            print(prompt)
-            coef_str = input()
-        else:
-            flag = True
+    # Переводим строку в действительное число
+    '''
+    Проверяем можно ли преобразовать строку в число и если 
+    нельзя, то вводим коэффицент вновь.
+    '''
+    try:
+        coef = float(coef_str)
+        # print(string_int)
+    except ValueError:
+        # Handle the exception
+        print('Введено некорректное число.')
+        coef = get_coef(index, 'Введите коэффициент снова:')
     return coef
 
 
+def get_D(a, b, c):
+    return b * b - 4 * a * c
+
 def get_roots(a, b, c):
-    result = []
-    D = b * b - 4 * a * c
-    if D == 0.0:
-        root = -b / (2.0 * a)
-        result.append(root)
-    elif D > 0.0:
-        sqD = math.sqrt(D)
-        q1 = (-b + sqD) / (2.0 * a)
-        q2 = (-b - sqD) / (2.0 * a)
-        # y = x^2 проверяем положительный ли y
-        if (q1 >= 0):
-            root1 = math.sqrt(q1)
-            root2 = -root1
+    result = []  # Cписок корней
+    '''
+    Рассмотрим случаи, когда один из коэффициентов
+    b или c равен 0 отдельно, так как их можно 
+    вычислить проще.
+    '''
+    if c == 0:
+        result.append(0)
+        Dc = - b / a
+        if Dc > 0:
+            root1 = math.sqrt(Dc)
+            root2 = - math.sqrt(Dc)
             result.append(root1)
-            if (root1 != root2):
+            result.append(root2)
+        return result
+
+    elif b == 0:
+        Db = - c / a
+        if Db > 0:
+            root1 = math.sqrt(math.sqrt(Db))
+            root2 = - math.sqrt(math.sqrt(Db))
+            result.append(root1)
+            result.append(root2)
+        if Db == 0:
+            result.append(0)
+        return result
+
+    else:
+        D1 = get_D(a, b, c)
+        if D1 < 0:
+            return result
+        elif D1 == 0:
+            D2 = - b / (2 * a)
+            if D2 < 0:
+                return result
+            # Если D2 = 0, то b = 0, а такой случай мы разобрали
+            else:
+                root1 = - math.sqrt(D2)
+                root2 = math.sqrt(D2)
+                result.append(root1)
                 result.append(root2)
-        if (q2 >= 0):
-            root3 = math.sqrt(q2)
-            root4 = -root3
-            result.append(root3)
-            if (root3 != root4):
+            return result
+        else:
+            D3 = (- b - math.sqrt(D1)) / (2 * a)
+            if D3 == 0:
+                result.append(0)
+            if D3 > 0:
+                root1 = - math.sqrt(D3)
+                root2 = math.sqrt(D3)
+                result.append(root1)
+                result.append(root2)
+            D4 = (- b + math.sqrt(D1)) / (2 * a)
+            if D4 == 0:
+                result.append(0)
+            if D4 > 0:
+                root3 = - math.sqrt(D4)
+                root4 = math.sqrt(D4)
+                result.append(root3)
                 result.append(root4)
-    return result
+            return result
 
 
 def main():
     a = get_coef(1, 'Введите коэффициент А:')
+    while a == 0:
+        a = get_coef(1, 'Коэффицент A не может быть равен 0. Введите коэффициент А снова:')
     b = get_coef(2, 'Введите коэффициент B:')
     c = get_coef(3, 'Введите коэффициент C:')
+    # Вычисление корней
     roots = get_roots(a, b, c)
+    # Вывод корней
     len_roots = len(roots)
-    if  len_roots == 1:
-        print('Один корень: {roots[0]}')
+    if len_roots == 0:
+        print('Нет корней')
+    elif len_roots == 1:
+        print('Один корень: {}'.format(roots[0]))
     elif len_roots == 2:
         print('Два корня: {} и {}'.format(roots[0], roots[1]))
     elif len_roots == 3:
-        print('Три корня: {} и {} и {}'.format(roots[0], roots[1], roots[2]))
-    elif  len_roots == 4:
-        print('Четыре корня: {} и {} и {} и {}'.format(roots[0], roots[1], roots[2],
-                                                       roots[3]))
-    else: print( 'Действительных корней нет')
+        print('Три корня: {}, {} и {}'.format(roots[0], roots[1], roots[2]))
+    elif len_roots == 4:
+        print('Четыре корня: {}, {}, {} и {}'.format(roots[0], roots[1], roots[2], roots[3]))
 
+
+# Если сценарий запущен из командной строки
 if __name__ == "__main__":
     main()
-
-# Пример запуска
-# 1 0 -4
