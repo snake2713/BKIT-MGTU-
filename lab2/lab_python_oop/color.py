@@ -1,21 +1,21 @@
 class FigureColor:
     """
-    Класс «Цвет фигуры»
+    Класс «Цвет фигуры», он содержит свойство для описания цвета геометрической фигуры
     """
+    def __init__(self): #init нужен для инициализации экземпляров класса после их создания 
+        self._color = None #после инициализации имеет значение None
 
-    def __init__(self):
-        self._color = None
-
-    @property
+    @property #нужен для определения методов класса, которые действуют как атрибуты
+    #также property позволяет превращать атрибуты класса в свойства или управляемые атрибуты
     def colorproperty(self):
         """
-        Get-аксессор
+        Геттер
         """
         return self._color
 
     @colorproperty.setter
     def colorproperty(self, value):
         """
-        Set-аксессор
+        Сеттер
         """
         self._color = value

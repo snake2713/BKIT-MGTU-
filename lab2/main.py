@@ -1,13 +1,18 @@
-import emoji
+import emoji #внешний пакет с использованием pip
 from lab_python_oop.rectangle import Rectangle
 from lab_python_oop.circle import Circle
 from lab_python_oop.square import Square
 
+        
+    # Прямоугольник синего цвета шириной N и высотой N.
+    # Круг зеленого цвета радиусом N.
+    # Квадрат красного цвета со стороной N.
 
+    
 def main():
-    r = Rectangle("синего", 15, 15)
-    c = Circle("зеленого", 15)
-    s = Square("красного", 15)
+    r = Rectangle("синего", 16, 16)
+    c = Circle("зеленого", 16)
+    s = Square("красного", 16)
     print(r)
     print(c)
     print(s)

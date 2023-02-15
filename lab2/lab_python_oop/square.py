@@ -19,6 +19,9 @@ class Square(Rectangle):
         super().__init__(color_param, self.side, self.side)
 
     def __repr__(self):
+        """
+        метод "repr", который возвращает в виде строки основные параметры фигуры, ее цвет и площадь.
+        """
         return '{} {} цвета со стороной {} площадью {}.'.format(
             Square.get_figure_type(),
             self.fc.colorproperty,

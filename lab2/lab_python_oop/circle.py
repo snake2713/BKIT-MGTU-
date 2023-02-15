@@ -28,6 +28,9 @@ class Circle(Figure):
         return math.pi*(self.r**2)
 
     def __repr__(self):
+        """
+        метод "repr", который возвращает в виде строки основные параметры фигуры, ее цвет и площадь.
+        """
         return '{} {} цвета радиусом {} площадью {}.'.format(
             Circle.get_figure_type(),
             self.fc.colorproperty,
