@@ -1,6 +1,8 @@
 from time import time, sleep
 from contextlib import contextmanager
 
+#считают время работы блока кода и выводят его на экран
+
 class cm_timer_1:
 
     def __init__(self):
@@ -15,7 +17,7 @@ class cm_timer_1:
         print("Время работы: ", self.finish - self.start)
 
 
-@contextmanager
+@contextmanager #на основе библиотеки 
 def cm_timer_2():
     start = time()
     yield None

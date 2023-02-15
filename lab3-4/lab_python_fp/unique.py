@@ -6,6 +6,7 @@ class Unique(object):
         self.index = 0
         self.lst = []
         try:
+# В качестве ключевого аргумента, конструктор должен принимать bool-параметр ignore_case,
             self.ignore_case = kwargs["ignore_case"]
         except:
             self.ignore_case = False

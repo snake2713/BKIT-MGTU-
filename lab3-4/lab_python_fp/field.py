@@ -1,13 +1,19 @@
+# Необходимо реализовать генератор field. Генератор field последовательно выдает значения ключей словаря. 
 def field(items, *args):
-    assert len(args) > 0
+    #items - список словарей
+    # *args - неограниченное количество аргументов
+    assert len(args) > 0 #проверяем на истинность 
+               
+           # Реализация генератора
+                
     if len(args) > 1:
         for el in items:
             dct = {}
             for keys, val in el.items():
                 for arg in args:
-                    if keys == arg:
-                        dct[keys] = val
-            yield dct
+                    if keys == arg: #ключ = значение 
+                        dct[keys] = val #записываем для вывода в список 
+            yield dct #возвращаем функцию с ее локальными переменными
     else:
         for el in items:
             for keys in el:
@@ -23,4 +29,6 @@ if __name__ == '__main__':
     ]
 
     print(list(field(goods, 'title')))
+    #field(goods, 'title') должен выдавать 'Ковер', 'Диван для отдыха'
     print(list(field(goods, 'title', 'price')))
+    #field(goods, 'title', 'price') должен выдавать {'title': 'Ковер', 'price': 2000}, {'title': 'Диван для отдыха'}

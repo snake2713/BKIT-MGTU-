@@ -1,15 +1,20 @@
-from random import randint
-
+#выдает заданное количество случайных чисел в заданном диапазоне от минимума до максимума
+from random import randint #чтобы начать использовать метод randint()
 lst = []
 
 
 def gen_random(num_count, begin, end):
     for i in range(0, num_count):
+        #функция range() возвращает последовательность целых чисел на основе переданных ей аргументов
         lst.append(randint(begin, end))
+        #randint() возвращает случайное значение между двумя нижними и верхними пределами
     numbers = map(str, lst)
-    print(', '.join(numbers))
+    #с помощью map приобразуем применяем str для всех элементов
+    print(', '.join(numbers)) #объединяем список для соpдания строки
     return lst
 
 
 if __name__ == '__main__':
     gen_random(5, 0, 10)
+#gen_random(5, 1, 3) должен выдать 5 случайных чисел в диапазоне от 1 до 3, например 2, 2, 3, 2, 1
+#gen_random(количество, минимум ,максимум)
